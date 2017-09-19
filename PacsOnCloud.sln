@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PacsOnCloud", "PacsOnCloud\PacsOnCloud.csproj", "{176B5258-3F8A-457B-8FD8-7330E6122E15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel", "DataModel\DataModel.csproj", "{B725594A-4E01-4499-9328-1A5E8280E4BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataModel", "DataModel\DataModel.csproj", "{B725594A-4E01-4499-9328-1A5E8280E4BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PacsClientTest", "PacsClientTest\PacsClientTest.csproj", "{38F17A77-6B52-4698-BC5D-023ABA38EB8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B725594A-4E01-4499-9328-1A5E8280E4BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B725594A-4E01-4499-9328-1A5E8280E4BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B725594A-4E01-4499-9328-1A5E8280E4BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38F17A77-6B52-4698-BC5D-023ABA38EB8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38F17A77-6B52-4698-BC5D-023ABA38EB8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38F17A77-6B52-4698-BC5D-023ABA38EB8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38F17A77-6B52-4698-BC5D-023ABA38EB8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

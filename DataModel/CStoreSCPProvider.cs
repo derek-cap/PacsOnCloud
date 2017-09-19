@@ -5,12 +5,16 @@ using System.Text;
 using Dicom.Log;
 using Dicom;
 using System.IO;
+using System.Threading;
 
 namespace DataModel
 {
     public class CStoreSCPProvider : DicomService, IDicomServiceProvider, IDicomCStoreProvider
     {
         private static string _storagePath = @"D:\DICOM";
+        private static int _index = 0;
+        private static readonly object _mutex = new object();
+
         private static DicomTransferSyntax[] AcceptedTransferSyntaxes = new DicomTransferSyntax[]
                                                                                 {
                                                                                     DicomTransferSyntax.ExplicitVRLittleEndian,
@@ -54,16 +58,22 @@ namespace DataModel
 
         public DicomCStoreResponse OnCStoreRequest(DicomCStoreRequest request)
         {
+            lock (_mutex)
+            {
+                _index++;
+            }
+
             var studyUid = request.Dataset.Get<string>(DicomTag.StudyInstanceUID);
             var instUid = request.SOPInstanceUID.UID;
 
             if (!Directory.Exists(_storagePath))
                 Directory.CreateDirectory(_storagePath);
 
-            string path = _storagePath + "\\" + instUid + ".dcm";
+            string path = _storagePath + "\\" + _index  + ".dcm";
             request.File.Save(path);
 
-            Logger.Info($"Got cstore request: {request.SOPInstanceUID}");
+      //      Thread.Sleep(2000);
+      //      Logger.Info($"Got cstore request: {instUid}");
             return new DicomCStoreResponse(request, DicomStatus.Success);
         }
 

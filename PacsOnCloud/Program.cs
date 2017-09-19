@@ -1,4 +1,5 @@
 ﻿using DataModel;
+using Dicom.Log;
 using Dicom.Network;
 using System;
 using System.Collections.Generic;
@@ -13,29 +14,14 @@ namespace PacsOnCloud
         static void Main(string[] args)
         {
             MyDicomServer server;
-
+            Console.WriteLine("This is server running...");
             try
             {
                 int port = 12345;
+                LogManager.SetImplementation(ConsoleLogManager.Instance);
 
-                server = new MyDicomServer(port, new ConsoleLogger());
+                server = new MyDicomServer(port, LogManager.GetLogger("a"));
                 server.Run();
-
-                var client = new DicomClient();
-                client.AddRequest(new DicomCStoreRequest(@"D:\test.dcm"));
-                Task.Run(() =>
-                {
-                    try
-                    {
-                        client.SendAsync("127.0.0.1", port, false, "SCU", "STORESCP");             // Alt 1
-                        Console.WriteLine("Send complete");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex);
-                    }
-                });
-            //    await client.SendAsync("127.0.0.1", 12345, false, "SCU", "ANY-SCP");  // Alt 2
             }
             catch (Exception ex)
             {
@@ -43,14 +29,6 @@ namespace PacsOnCloud
             }
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
-        }
-    }
-
-    class ConsoleLogger : ILogger
-    {
-        public void Log(string message)
-        {
-            Console.WriteLine(message);
         }
     }
 }

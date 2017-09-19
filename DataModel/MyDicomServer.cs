@@ -1,4 +1,5 @@
-﻿using Dicom.Network;
+﻿using Dicom.Log;
+using Dicom.Network;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,9 +9,9 @@ namespace DataModel
     public class MyDicomServer
     {
         private IDicomServer _dicomServer;
-        private ILogger _logger;
+        private Logger _logger;
 
-        public MyDicomServer(int port, ILogger logger)
+        public MyDicomServer(int port, Logger logger)
         {
             _logger = logger;
             _dicomServer = DicomServer.Create<CStoreSCPProvider>(port);
@@ -18,8 +19,8 @@ namespace DataModel
 
         public void Run()
         {
-            _logger?.Log($"C-Store server is running.");
-            _logger.Log(_dicomServer.IsListening.ToString());
+            _logger?.Info($"C-Store server is running.");
+            _logger?.Info(_dicomServer.IsListening.ToString());
         }
     }
 }
