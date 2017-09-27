@@ -1,20 +1,72 @@
-﻿using DataModel;
-using Dicom.Log;
-using Dicom.Network;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace PacsOnCloud
+namespace CoreWinSubLog
 {
-    class Program
+    public abstract class Logger
     {
+        /// <summary>
+        /// Log a message to the logger.
+        /// </summary>
+        /// <param name="level">Log level.</param>
+        /// <param name="msg">Log message (format string).</param>
+        /// <param name="args">Log message arguments.</param>
+        public abstract void Log(LogLevel level, string msg, params object[] args);
+
+        /// <summary>
+        /// Log a debug message to the logger.
+        /// </summary>
+        /// <param name="msg">Log message (format string).</param>
+        /// <param name="args">Log message arguments.</param>
+        public void Debug(string msg, params object[] args)
+        {
+            this.Log(LogLevel.Debug, msg, args);
+        }
+
+        /// <summary>
+        /// Log an informational message to the logger.
+        /// </summary>
+        /// <param name="msg">Log message (format string).</param>
+        /// <param name="args">Log message arguments.</param>
+        public void Info(string msg, params object[] args)
+        {
+            this.Log(LogLevel.Info, msg, args);
+        }
+
+        /// <summary>
+        /// Log a warning message to the logger.
+        /// </summary>
+        /// <param name="msg">Log message (format string).</param>
+        /// <param name="args">Log message arguments.</param>
+        public void Warn(string msg, params object[] args)
+        {
+            this.Log(LogLevel.Warning, msg, args);
+        }
+
+        /// <summary>
+        /// Log an error message to the logger.
+        /// </summary>
+        /// <param name="msg">Log message (format string).</param>
+        /// <param name="args">Log message arguments.</param>
+        public void Error(string msg, params object[] args)
+        {
+            this.Log(LogLevel.Error, msg, args);
+        }
+
+        /// <summary>
+        /// Log a fatal error message to the logger.
+        /// </summary>
+        /// <param name="msg">Log message (format string).</param>
+        /// <param name="args">Log message arguments.</param>
+        public void Fatal(string msg, params object[] args)
+        {
+            this.Log(LogLevel.Fatal, msg, args);
+        }
+
+        private static readonly Regex CurlyBracePairRegex = new Regex(@"{.*?}");
+
         /// <summary>
         /// Called to adapt the string message before passing through
         /// Adapts messages of the form
@@ -28,7 +80,6 @@ namespace PacsOnCloud
         /// <returns></returns>
         protected static string NameFormatToPositionalFormat(string message)
         {
-            Regex CurlyBracePairRegex = new Regex(@"{.*?}");
             var matches = CurlyBracePairRegex.Matches(message).Cast<Match>();
 
             var handledMatchNames = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
@@ -102,45 +153,6 @@ namespace PacsOnCloud
         {
             int dummy;
             return int.TryParse(s, out dummy);
-        }
-
-
-        static void Main(string[] args)
-        {
-            MyDicomServer server;
-            Console.WriteLine("This is server running...");
-            try
-            {
-                int port = 12345;
-                LogManager.SetImplementation(new MinLogManager("127.0.0.1"));
-                Logger logger = LogManager.GetLogger("a");
-
-                server = new MyDicomServer(port, logger);
-                server.Run();
-
-                string msg = "Searching {path}\\{wildcard} for Dicom codecs";
-                string path = "A";
-                string wildcard = "B";
-                string s = string.Format(NameFormatToPositionalFormat(msg), path, wildcard);
-                Console.WriteLine(s);
-
-                string name = Process.GetCurrentProcess().ProcessName;
-                logger.Debug($"Process name: {name}");
-
-                string hostname = Dns.GetHostName();
-                logger.Debug("Hostname: {hostname}", hostname);
-
-                IPHostEntry localhost = Dns.GetHostEntry(hostname);
-                IPAddress[] address = localhost.AddressList;
-                IPAddress theOne = address.Where(t => t.AddressFamily == AddressFamily.InterNetwork).First();
-                logger.Debug(theOne.ToString());
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-            Console.WriteLine("Press any key to exit...");
-            Console.ReadKey();
         }
     }
 }

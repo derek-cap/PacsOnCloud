@@ -15,6 +15,7 @@ namespace PacsClientTest
             Console.WriteLine("This is client running...");
             try
             {
+                string ipAddress = "10.10.21.98";
                 int port = 12345;
                 var client = new DicomClient();
                 for (int i = 0; i < 10; i++)
@@ -25,12 +26,12 @@ namespace PacsClientTest
                 {
                     try
                     {
-                        client.SendAsync("127.0.0.1", port, false, "SCU", "STORESCP");             // Alt 1
+                        client.SendAsync(ipAddress, port, false, "SCU", "STORESCP");             // Alt 1
                         Console.WriteLine("Send complete");
                         client.Release();
                         Thread.Sleep(5000);
                         client.AddRequest(new DicomCStoreRequest(@"D:\test.dcm"));
-                        client.SendAsync("127.0.0.1", port, false, "SCU", "STORESCP");             // Alt 1
+                        client.SendAsync(ipAddress, port, false, "SCU", "STORESCP");             // Alt 1
                     }
                     catch (Exception ex)
                     {
