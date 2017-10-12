@@ -1,4 +1,5 @@
-﻿using Dicom.Network;
+﻿using Dicom.Log;
+using Dicom.Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,15 @@ namespace PacsClientTest
     {
         static void Main(string[] args)
         {
+            LogManager.SetImplementation(ConsoleLogManager.Instance);
+            Logger logger = LogManager.GetLogger("");
+
+
             Console.WriteLine("This is client running...");
             try
             {
+                logger.Debug("client debug.");
+
                 string ipAddress = "10.10.21.98";
                 int port = 12345;
                 var client = new DicomClient();
@@ -35,7 +42,7 @@ namespace PacsClientTest
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex);
+                        logger.Error(ex.ToString());
                     }
                 });
                

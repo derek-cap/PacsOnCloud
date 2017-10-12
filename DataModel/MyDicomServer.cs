@@ -14,7 +14,7 @@ namespace DataModel
         public MyDicomServer(int port, Logger logger)
         {
             _logger = logger;
-            _dicomServer = DicomServer.Create<CStoreSCPProvider>(port);
+            _dicomServer = DicomServer.Create<CStoreSCPProvider>(port, null, null, null, logger);
         }
 
         public void Run()

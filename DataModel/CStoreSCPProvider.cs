@@ -43,7 +43,8 @@ namespace DataModel
                                                                                          DicomTransferSyntax.ImplicitVRLittleEndian
                                                                                  };
 
-        public CStoreSCPProvider(INetworkStream stream, Encoding fallbackEncoding, Logger log) : base(stream, fallbackEncoding, log)
+        public CStoreSCPProvider(INetworkStream stream, Encoding fallbackEncoding, Logger log)
+            : base(stream, fallbackEncoding, log)
         {
         }
 

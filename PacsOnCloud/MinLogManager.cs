@@ -24,33 +24,19 @@ namespace PacsOnCloud
 
     public class MinLogger : Logger
     {
-        readonly TcpLog _tcpLog;
-        readonly TextLog _textLog;
+        private readonly CoreWinSubLog.MinLogger _logger;
 
         public MinLogger(string ipAddress)
         {
-            _tcpLog = new TcpLog(ipAddress);
-            _textLog = new TextLog();
+            _logger = new CoreWinSubLog.MinLogger("127.0.0.1", "C:\\Temp\\Log");
         }
 
         public override void Log(LogLevel level, string msg, params object[] args)
         {
-            string theMessage = string.Format(NameFormatToPositionalFormat(msg), args);
-
-            ILog usedOne = GetUsedLog();
-            usedOne.Log(level, theMessage);
-        }
-
-        private ILog GetUsedLog()
-        {
-            if (_tcpLog.IsConnected())
-            {
-                return _tcpLog;
-            }
-            else
-            {
-                return _textLog;
-            }
+            string levelString = level.ToString();
+            CoreWinSubLog.LogLevel theLevel = CoreWinSubLog.LogLevel.Debug;
+            Enum.TryParse(levelString, out theLevel);
+            _logger.Log(theLevel, msg, args);
         }
     }
 }
