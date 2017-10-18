@@ -10,6 +10,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Lords.DataModel;
 
 namespace PacsOnCloud
 {
@@ -21,20 +22,22 @@ namespace PacsOnCloud
             Console.WriteLine("This is server running...");
             try
             {
-                int port = 12345;
-                LogManager.SetImplementation(new MinLogManager("127.0.0.1"));
-                Logger logger = LogManager.GetLogger("a");
+                //    int port = 12345;
+                //    LogManager.SetImplementation(new MinLogManager("127.0.0.1"));
+                //    Logger logger = LogManager.GetLogger("a");
 
-                server = new MyDicomServer(port, logger);
-                server.Run();
+                //    server = new MyDicomServer(port, logger);
+                //    server.Run();
 
-                string hostname = Dns.GetHostName();
-                logger.Debug("Hostname: {hostname}", hostname);
+                //    string hostname = Dns.GetHostName();
+                //    logger.Debug("Hostname: {hostname}", hostname);
 
-                IPHostEntry localhost = Dns.GetHostEntry(hostname);
-                IPAddress[] address = localhost.AddressList;
-                IPAddress theOne = address.Where(t => t.AddressFamily == AddressFamily.InterNetwork).First();
-                logger.Debug(theOne.ToString());
+                //    IPHostEntry localhost = Dns.GetHostEntry(hostname);
+                //    IPAddress[] address = localhost.AddressList;
+                //    IPAddress theOne = address.Where(t => t.AddressFamily == AddressFamily.InterNetwork).First();
+                //    logger.Debug(theOne.ToString());
+
+                Lord lord = new Lord("Derek", "1001");
             }
             catch (Exception ex)
             {

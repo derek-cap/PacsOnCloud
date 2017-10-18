@@ -63,6 +63,10 @@
       <Project>{b725594a-4e01-4499-9328-1a5e8280e4bf}</Project>
       <Name>DataModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lord.DataModel\Lords.DataModel.csproj">
+      <Project>{db8e30cf-367b-4289-91a8-a82c347f818e}</Project>
+      <Name>Lords.DataModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\fo-dicom.Desktop.3.0.2\build\net452\fo-dicom.Desktop.targets" Condition="Exists('..\packages\fo-dicom.Desktop.3.0.2\build\net452\fo-dicom.Desktop.targets')" />
