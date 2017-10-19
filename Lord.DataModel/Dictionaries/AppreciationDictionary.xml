@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<dictionaries>
+  <dictionary>
+    <appreciation Id="1000" resource="people" property="100" capacity="5000" acceleration="1"/>
+    <appreciation Id="1001" resource="people" property="100" capacity="5000" acceleration="1"/>
+    <appreciation Id="1002" resource="people" property="100" capacity="5000" acceleration="1"/>
+    <appreciation Id="1003" resource="people" property="100" capacity="5000" acceleration="1"/>
+    <appreciation Id="1004" resource="people" property="100" capacity="5000" acceleration="1"/>
+    <appreciation Id="1005" resource="people" property="100" capacity="5000" acceleration="1"/>
+    <appreciation Id="2000" resource="people" property="100" capacity="5000" acceleration="1"/>
+    <appreciation Id="2001" resource="people" property="100" capacity="5000" acceleration="1"/>
+    <appreciation Id="2002" resource="people" property="100" capacity="5000" acceleration="1"/>
+    <appreciation Id="2003" resource="people" property="100" capacity="5000" acceleration="1"/>
+    <appreciation Id="2004" resource="people" property="100" capacity="5000" acceleration="1"/>
+    <appreciation Id="2005" resource="people" property="100" capacity="5000" acceleration="1"/>
+  </dictionary>
+</dictionaries>

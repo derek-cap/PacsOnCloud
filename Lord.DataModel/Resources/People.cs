@@ -8,6 +8,8 @@ namespace Lords.DataModel
     {
         public People(int number)
             : base(number)
-        { }
+        {
+            _baseAcceleration = 10;
+        }
     }
 }

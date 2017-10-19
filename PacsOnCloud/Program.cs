@@ -18,7 +18,7 @@ namespace PacsOnCloud
     {      
         static void Main(string[] args)
         {
-            MyDicomServer server;
+      //      MyDicomServer server;
             Console.WriteLine("This is server running...");
             try
             {

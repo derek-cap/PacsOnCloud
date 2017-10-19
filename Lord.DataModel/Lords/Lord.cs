@@ -20,6 +20,7 @@ namespace Lords.DataModel
 
         public Castle Castle { get; protected set; }
 
+        // Resource increase timer.
         private readonly Timer _timer;
 
         public Lord(string id, string castleId)
@@ -31,25 +32,42 @@ namespace Lords.DataModel
             Wood = new Wood(100);
             Stone = new Stone(100);
             
-            Castle = new Castle(castleId);
+            Castle = new Castle(castleId, this);
             _timer = new Timer(new TimerCallback(AutoResourceUpdateTick), null, 0, 1000);
+        }
+
+        public void AcceptAppreciation(Appreciation appreciation)
+        {
+            foreach(var item in AllResouce())
+            {
+                item.AcceptAppreciation(appreciation);
+            }
         }
 
         public void AutoResourceUpdateTick(object o)
         {
-            Food.AutoUpdateTick();
-            Gold.AutoUpdateTick();
-            Iron.AutoUpdateTick();
-            Wood.AutoUpdateTick();
-            Stone.AutoUpdateTick();
+            foreach (var item in AllResouce())
+            {
+                item.AutoUpdateTick();
+            }
             Castle.AutoUpdateTick();
 
             Console.WriteLine(this);
+            Console.WriteLine();
+        }
+
+        private IEnumerable<Resource> AllResouce()
+        {
+            yield return Food;
+            yield return Gold;
+            yield return Iron;
+            yield return Wood;
+            yield return Stone;
         }
 
         public override string ToString()
         {
-            return $"Lord {Id} Castle: {Castle}\nFood: {Food}, Gold: {Gold}, Iron: {Iron}, Wood: {Wood}, Stone: {Stone}";
+            return $"Lord {Id} {Castle}\nFood: {Food}, Gold: {Gold}, Iron: {Iron}, Wood: {Wood}, Stone: {Stone}";
         }
     }
 }
