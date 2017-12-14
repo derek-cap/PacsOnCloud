@@ -4,33 +4,33 @@ using System.Text;
 
 namespace Lords.DataModel
 {
-    public class Sword : BattleBase
-    {                
-        public Sword(string id)
+    public class Spear : BattleBase
+    {
+        public Spear(string id)
             : base(id)
         {
-            AttackInterval = 0.8;
-            Health = 220;
-            Hit = 32;
-            Armor = 12;
+            AttackInterval = 0.7;
+            Health = 200;
+            Hit = 24;
+            Armor = 20;
             NoArmorHurt = 0;
         }
     }
 
-    public class SwordArmy : Army
+    public class SpearArmy : Army
     {
-        public SwordArmy(string id)
+        public SpearArmy(string id)
             : base(id)
         {
-            _maxCount = 50;
+            _maxCount = 60;
             RecruitRound = 1;
             InitializeBattleUnits(_maxCount);
         }
 
         protected override BattleBase NewBattleBase(string id)
         {
-            string theId = "Sword " + id;
-            return new Sword(theId);
+            string theId = "Spear " + id;
+            return new Spear(theId);
         }
     }
 }

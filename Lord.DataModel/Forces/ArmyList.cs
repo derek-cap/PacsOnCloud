@@ -15,15 +15,15 @@ namespace Lords.DataModel
 
         public void Add(Army army)
         {
-            Type type = army.GetType();
-            if (_collection.ContainsKey(type))
-            {
-                _collection[type].Add(army.Count);
-            }
-            else
-            {
-                _collection[type] = army;
-            }
+            //Type type = army.GetType();
+            //if (_collection.ContainsKey(type))
+            //{
+            //    _collection[type].Add(army.Count);
+            //}
+            //else
+            //{
+            //    _collection[type] = army;
+            //}
         }
 
         public override string ToString()

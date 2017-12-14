@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Lords.DataModel
 {
-    public class People : Resource
+    public class Population : Resource
     {
-        public People(int number)
+        public Population(int number)
             : base(number)
         {
             _baseAcceleration = 10;

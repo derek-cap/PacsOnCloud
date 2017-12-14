@@ -63,7 +63,7 @@ namespace Lords.DataModel
             }
         }
 
-        public virtual void AutoUpdateTick()
+        public virtual void TickPerSecond()
         {
             lock (_mutex)
             {

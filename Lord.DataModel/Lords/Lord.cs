@@ -5,12 +5,9 @@ using System.Threading;
 
 namespace Lords.DataModel
 {
-    public class Lord
+    public class Lord : UpgradeBase
     {
         public string Id { get; protected set; }
-
-        public int Level { get; protected set; }
-        public int Experience { get; protected set; }
 
         public Food Food { get; protected set; }
         public Gold Gold { get; protected set; }
@@ -24,8 +21,11 @@ namespace Lords.DataModel
         private readonly Timer _timer;
 
         public Lord(string id, string castleId)
+            : base(int.MaxValue, int.MaxValue)
         {
             Id = id;
+            Level = 1;
+
             Food = new Food(100);
             Gold = new Gold(100);
             Iron = new Iron(100);
@@ -33,7 +33,10 @@ namespace Lords.DataModel
             Stone = new Stone(100);
             
             Castle = new Castle(castleId, this);
-            _timer = new Timer(new TimerCallback(AutoResourceUpdateTick), null, 0, 1000);
+            _timer = new Timer(new TimerCallback(ResourceTickPerSecond), null, 0, 1000);
+
+            LevelUpEvent += new EventHandler<int>((o, level) => { Console.WriteLine($"Congratulation! You level up to {Level}"); });
+            LevelDownEvent += new EventHandler<int>((o, level) => { Console.WriteLine($"Too bad! You level fall to {Level}"); });
         }
 
         public void AcceptAppreciation(Appreciation appreciation)
@@ -44,16 +47,16 @@ namespace Lords.DataModel
             }
         }
 
-        public void AutoResourceUpdateTick(object o)
+        public void ResourceTickPerSecond(object o)
         {
             foreach (var item in AllResouce())
             {
-                item.AutoUpdateTick();
+                item.TickPerSecond();
             }
-            Castle.AutoUpdateTick();
+            Castle.TickPerSecond();
 
-            Console.WriteLine(this);
-            Console.WriteLine();
+            //Console.WriteLine(this);
+            //Console.WriteLine();
         }
 
         private IEnumerable<Resource> AllResouce()

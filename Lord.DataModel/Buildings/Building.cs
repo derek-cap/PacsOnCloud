@@ -8,6 +8,8 @@ namespace Lords.DataModel
 {
     public abstract class Building
     {
+        protected int _maxLevel;
+
         public int Id { get; protected set; }
         public int Level { get; protected set; }
         public string Name { get; protected set; }
@@ -17,12 +19,21 @@ namespace Lords.DataModel
 
         public Building()
         {
+            _maxLevel = 10;
             UpdateAppreciaitons();
         }
 
         public void LevelUp()
         {
-            Level++;
+            if (Level < _maxLevel)
+            {
+                Level++;
+            }
+        }
+
+        public bool CanLevelUp()
+        {
+            return Level < _maxLevel;
         }
 
         protected virtual void UpdateAppreciaitons()

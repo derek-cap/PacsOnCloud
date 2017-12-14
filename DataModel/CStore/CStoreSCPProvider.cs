@@ -9,9 +9,9 @@ using System.Threading;
 
 namespace DataModel
 {
-    public class CStoreSCPProvider : DicomService, IDicomServiceProvider, IDicomCStoreProvider
+    public class CStoreSCPProvider : DicomService, IDicomServiceProvider, IDicomCStoreProvider, IDicomCEchoProvider
     {
-        private static string _storagePath = @"D:\DICOM";
+        private static string _storagePath = @"D:\DicomStoreTemp";
         private static int _index = 0;
         private static readonly object _mutex = new object();
 
@@ -43,6 +43,10 @@ namespace DataModel
                                                                                          DicomTransferSyntax.ImplicitVRLittleEndian
                                                                                  };
 
+        public CStoreSCPProvider()
+            : base(null, null, null)
+        { }
+
         public CStoreSCPProvider(INetworkStream stream, Encoding fallbackEncoding, Logger log)
             : base(stream, fallbackEncoding, log)
         {
@@ -70,21 +74,25 @@ namespace DataModel
             if (!Directory.Exists(_storagePath))
                 Directory.CreateDirectory(_storagePath);
 
-            string path = _storagePath + "\\" + _index  + ".dcm";
+            Console.WriteLine($"Got image {_index}");
+            int threadId = Thread.CurrentThread.ManagedThreadId;
+
+            string path = $"{_storagePath}\\{_index}_{threadId}.dcm";
             request.File.Save(path);
 
-      //      Thread.Sleep(2000);
-      //      Logger.Info($"Got cstore request: {instUid}");
             return new DicomCStoreResponse(request, DicomStatus.Success);
         }
 
         public void OnCStoreRequestException(string tempFileName, Exception e)
         {
-   //         throw new NotImplementedException();
+            //         throw new NotImplementedException();
+            Logger?.Error(e.ToString());
         }
 
         public void OnReceiveAbort(DicomAbortSource source, DicomAbortReason reason)
         {
+            string message = $"CStore provider receive abort: Source {source}, Reason {reason}";
+            Logger?.Warn(message);
    //         throw new NotImplementedException();
         }
 
@@ -95,7 +103,7 @@ namespace DataModel
 
         public void OnReceiveAssociationRequest(DicomAssociation association)
         {
-            if (association.CalledAE != "STORESCP")
+            if (association.CalledAE != "MinfoundSCP")
             {
                 SendAssociationReject(
                     DicomRejectResult.Permanent,

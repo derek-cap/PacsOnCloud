@@ -9,7 +9,7 @@ namespace Lords.DataModel
     {
         public string Name { get; protected set; }
         public string Id { get; protected set; }
-        public People People { get; protected set; }
+        public Population People { get; protected set; }
 
         public Lord Lord { get; private set; }
         public ArmyList ArmyList { get; protected set; }
@@ -20,7 +20,7 @@ namespace Lords.DataModel
         {
             this.Id = id;
             Name = id;
-            People = new People(1000);
+            People = new Population(1000);
 
             Lord = lord;
             ArmyList = new ArmyList();
@@ -48,9 +48,9 @@ namespace Lords.DataModel
             ArmyList.Add(army);
         }
 
-        public void AutoUpdateTick()
+        public void TickPerSecond()
         {
-            People.AutoUpdateTick();
+            People.TickPerSecond();
         }
 
         public override string ToString()

@@ -15,7 +15,16 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CClientTest", "CClientTest\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lords.DataModel", "Lord.DataModel\Lords.DataModel.csproj", "{DB8E30CF-367B-4289-91A8-A82C347F818E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EveryTestApp", "EveryTestApp\EveryTestApp.csproj", "{E552CD2A-8CF3-43CE-9AF4-1724B2C54FA1}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DataModel.Shared", "D:\SVN_2015\trunk\Software\ConsoleSubsystem\WorkStation\DataModel.Shared\DataModel.Shared.shproj", "{9AC83875-153E-4CCA-9DBA-77CAA69C6B49}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrasturcture", "Infrasturcture", "{86B12377-DB52-47F2-8426-5981E7F67DB6}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		D:\SVN_2015\trunk\Software\ConsoleSubsystem\WorkStation\DataModel.Shared\DataModel.Shared.projitems*{9ac83875-153e-4cca-9dba-77caa69c6b49}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
@@ -95,6 +104,18 @@ Global
 		{DB8E30CF-367B-4289-91A8-A82C347F818E}.Release|x64.Build.0 = Release|Any CPU
 		{DB8E30CF-367B-4289-91A8-A82C347F818E}.Release|x86.ActiveCfg = Release|Any CPU
 		{DB8E30CF-367B-4289-91A8-A82C347F818E}.Release|x86.Build.0 = Release|Any CPU
+		{E552CD2A-8CF3-43CE-9AF4-1724B2C54FA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E552CD2A-8CF3-43CE-9AF4-1724B2C54FA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E552CD2A-8CF3-43CE-9AF4-1724B2C54FA1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E552CD2A-8CF3-43CE-9AF4-1724B2C54FA1}.Debug|x64.Build.0 = Debug|Any CPU
+		{E552CD2A-8CF3-43CE-9AF4-1724B2C54FA1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E552CD2A-8CF3-43CE-9AF4-1724B2C54FA1}.Debug|x86.Build.0 = Debug|Any CPU
+		{E552CD2A-8CF3-43CE-9AF4-1724B2C54FA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E552CD2A-8CF3-43CE-9AF4-1724B2C54FA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E552CD2A-8CF3-43CE-9AF4-1724B2C54FA1}.Release|x64.ActiveCfg = Release|Any CPU
+		{E552CD2A-8CF3-43CE-9AF4-1724B2C54FA1}.Release|x64.Build.0 = Release|Any CPU
+		{E552CD2A-8CF3-43CE-9AF4-1724B2C54FA1}.Release|x86.ActiveCfg = Release|Any CPU
+		{E552CD2A-8CF3-43CE-9AF4-1724B2C54FA1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

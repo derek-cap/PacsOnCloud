@@ -22,5 +22,10 @@ namespace DataModel
             _logger?.Info($"C-Store server is running.");
             _logger?.Info(_dicomServer.IsListening.ToString());
         }
+
+        public static IDicomServer CreateCFindServer(int port, Logger logger)
+        {
+            return DicomServer.Create<CFindSCPProvider>(port, null, null, null, logger);
+        }
     }
 }

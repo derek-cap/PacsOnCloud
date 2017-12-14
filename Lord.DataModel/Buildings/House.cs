@@ -8,7 +8,8 @@ namespace Lords.DataModel
     public class House : Building
     {
         public House()
-        {            
+        {
+            _maxLevel = 10;
         }
     }
 }
